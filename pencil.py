@@ -1,25 +1,27 @@
 import cv2
+import numpy as np
 import common_utils as utils
 
 # Params
 IMAGE = "face1.jpg"
-NOISE1 = "noise1.jpg"
-NOISE2 = "noise2.jpg"
-BLENDING_COEFF = 0.15
-BLUR = 5
-COLORED = False
+NOISE1 = 100
+NOISE2 = 0.1
+BLENDING_COEFF = 0.10
+BLUR = 3
+COLORED = True
 
 
-def pencil_noise(st):
-    # TODO replace with generated noise!
-    noise = cv2.imread(st, cv2.IMREAD_GRAYSCALE)
+def pencil_noise(var):
+    mean = 0
+    sigma = var ** 0.5
+    noise = np.random.normal(mean, sigma, img.shape)
     noise = utils.motion_blur_horizontal(noise, BLUR)
+    cv2.imshow("noise", noise)
     return noise
 
 
-noise1 = pencil_noise(NOISE1)
-
 img = cv2.imread(IMAGE, cv2.IMREAD_GRAYSCALE)
+noise1 = pencil_noise(NOISE1)
 
 if COLORED:
     noise2 = pencil_noise(NOISE2)
@@ -28,7 +30,7 @@ if COLORED:
     r = utils.add_weighted(noise1, BLENDING_COEFF, r, 1 - BLENDING_COEFF)
     r = utils.adjust_gamma(r, 1.5)
     b = utils.add_weighted(noise2, BLENDING_COEFF, b, 1 - BLENDING_COEFF)
-    b = utils.adjust_gamma(b, 0.6)
+    b = utils.adjust_gamma(b, 1.8)
     out = cv2.merge((b, g, r))
 else:
     out = utils.add_weighted(noise1, BLENDING_COEFF, img, 1 - BLENDING_COEFF)

@@ -3,8 +3,8 @@ import numpy as np
 
 # Params
 IMAGE = "face1.jpg"
-WARP_ANGLE = np.pi / 2
-WARP_RADIUS = 200
+WARP_ANGLE = np.pi * 2
+WARP_RADIUS = 150
 BILINEAR_INTERP = False
 
 
