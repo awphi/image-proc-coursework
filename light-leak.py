@@ -7,7 +7,7 @@ IMAGE = "face1.jpg"
 MASK = "mask1.jpg"
 DARKENING_COEFF = 0.6
 BLENDING_COEFF = 0.4
-RAINBOW = True
+RAINBOW = False
 
 # Extra params
 RAINBOW_STRETCH = 1.1

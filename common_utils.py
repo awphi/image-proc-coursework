@@ -36,7 +36,7 @@ def kernel_filter(image, scalar, kernel):
 
 def filter_image(image, scalar, kernel):
     if len(image.shape) != 3:
-        channels = image
+        channels = [image]
     else:
         channels = cv2.split(image)
 
@@ -47,7 +47,7 @@ def filter_image(image, scalar, kernel):
 
 
 def box_blur(image, ksize=3):
-    return filter_image(image, 1 / ksize ** 2, np.ones((ksize, ksize), np.uint8))
+    return filter_image(image, 1 / (ksize ** 2), np.ones((ksize, ksize), np.uint8))
 
 
 def motion_blur_horizontal(image, ksize=3):
